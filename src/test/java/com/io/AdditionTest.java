@@ -1,8 +1,13 @@
 package com.io;
 
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.condition.EnabledForJreRange;
+import org.junit.jupiter.api.condition.EnabledOnOs;
+import org.junit.jupiter.api.condition.JRE;
+import org.junit.jupiter.api.condition.OS;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
         /*
@@ -55,6 +60,7 @@ class AdditionTest {
 
     @Test
     @DisplayName("add 2 number Test")
+    @EnabledOnOs(OS.WINDOWS)
     void add() {
         int actual = mathTest.add(33, 44);
         int expected = 77;
@@ -62,8 +68,10 @@ class AdditionTest {
     }
 
     @Test
-    @Disabled               // @Disable Skips the Test case
+    @EnabledForJreRange(min = JRE.JAVA_8, max = JRE.JAVA_11)
     void computeCircleArea() {
+        boolean isDbConnected = false;
+        assumeTrue(isDbConnected);
         double actual = Math.PI * 10 * 10;
         double expected = mathTest.computeCircleArea(10);
         assertEquals(actual, expected);
