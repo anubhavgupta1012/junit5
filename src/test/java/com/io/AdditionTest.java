@@ -1,9 +1,11 @@
 package com.io;
 
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.condition.EnabledForJreRange;
+import org.junit.jupiter.api.condition.JRE;
 
-import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
 class AdditionTest {
     /*
@@ -47,32 +49,30 @@ class AdditionTest {
         System.out.println("After All Executed");
     }
 
-    /*@Test
-    @DisplayName("add 2 number Test")
-    @EnabledOnOs(OS.WINDOWS)
-    void add() {
-        int actual = mathTest.add(33, 44);
-        int expected = 77;
-        assertEquals(expected, actual, "addition is a+b");
+    @Nested
+    class addTest {// Nested class Test are just for grouping same kind of tests together
+        @Test
+        @DisplayName("addition of + numbers")
+        void addPositive() {
+            assertEquals(77, mathTest.add(33, 44), "addition is a+b");
+        }
+
+        @Test
+        @DisplayName("addition of - numbers")
+        void addNegative() {
+            assertEquals(77, mathTest.add(-23, 100), "addition is -a+b");
+        }
     }
 
     @Test
     @EnabledForJreRange(min = JRE.JAVA_8, max = JRE.JAVA_11)
     void computeCircleArea() {
-        boolean isDbConnected = false;
+        boolean isDbConnected = true;
         assumeTrue(isDbConnected);
         double actual = Math.PI * 10 * 10;
         double expected = mathTest.computeCircleArea(10);
         assertEquals(actual, expected);
 
-    }*/
-
-    @Test
-    public void testAll() {
-        assertAll(
-                () -> assertEquals(Math.PI * 10 * 10, mathTest.computeCircleArea(10)),
-                () -> assertEquals(77, mathTest.add(33, 44))
-        );
     }
 
 }
