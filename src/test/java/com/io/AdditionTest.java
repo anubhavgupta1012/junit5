@@ -4,6 +4,13 @@ import org.junit.jupiter.api.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
+        /*
+        *only one instance will be created for test methods of class
+        * for that Junit allows us to remove static from @BeforeAll and @AfterAll methods
+        * because there will be only single instance for Test Class and
+        * after instantiation @BeforeAll executes.
+        */
 class AdditionTest {
     /*
      *
@@ -13,11 +20,12 @@ class AdditionTest {
     MathTest mathTest;
 
     public AdditionTest() {
+        //For Each Test Method a new Instance of AdditionTest is created every time for Every method
         System.out.println("Test Class Instance created");
     }
 
     @BeforeAll
-    public static void beforeAll() {
+    public void beforeAll() {
         System.out.println("Before All created Here");
     }
 
@@ -39,8 +47,9 @@ class AdditionTest {
         System.gc();
         System.out.println("Garbage Collection After Each Test Execution");
     }
+
     @AfterAll
-    public static void afterAll() {
+    public void afterAll() {
         System.out.println("After All Executed");
     }
 
