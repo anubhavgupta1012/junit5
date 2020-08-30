@@ -1,15 +1,10 @@
 package com.io;
 
 import org.junit.jupiter.api.*;
-import org.junit.jupiter.api.condition.EnabledForJreRange;
-import org.junit.jupiter.api.condition.EnabledOnOs;
-import org.junit.jupiter.api.condition.JRE;
-import org.junit.jupiter.api.condition.OS;
 
+import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
-@TestInstance(TestInstance.Lifecycle.PER_CLASS)
         /*
          *only one instance will be created for test methods of class
          * for that Junit allows us to remove static from @BeforeAll and @AfterAll methods
@@ -30,7 +25,7 @@ class AdditionTest {
     }
 
     @BeforeAll
-    public void beforeAll() {
+    public static void beforeAll() {
         System.out.println("Before All created Here");
     }
 
@@ -54,11 +49,11 @@ class AdditionTest {
     }
 
     @AfterAll
-    public void afterAll() {
+    public static void afterAll() {
         System.out.println("After All Executed");
     }
 
-    @Test
+    /*@Test
     @DisplayName("add 2 number Test")
     @EnabledOnOs(OS.WINDOWS)
     void add() {
@@ -76,5 +71,14 @@ class AdditionTest {
         double expected = mathTest.computeCircleArea(10);
         assertEquals(actual, expected);
 
+    }*/
+
+    @Test
+    public void testAll() {
+        assertAll(
+                () -> assertEquals(Math.PI * 10 * 10, mathTest.computeCircleArea(10)),
+                () -> assertEquals(77, mathTest.add(33, 44))
+        );
     }
+
 }
