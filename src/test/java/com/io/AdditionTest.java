@@ -5,12 +5,6 @@ import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-        /*
-         *only one instance will be created for test methods of class
-         * for that Junit allows us to remove static from @BeforeAll and @AfterAll methods
-         * because there will be only single instance for Test Class and
-         * after instantiation @BeforeAll executes.
-         */
 class AdditionTest {
     /*
      *
