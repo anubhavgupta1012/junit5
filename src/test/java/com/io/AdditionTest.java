@@ -6,11 +6,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
         /*
-        *only one instance will be created for test methods of class
-        * for that Junit allows us to remove static from @BeforeAll and @AfterAll methods
-        * because there will be only single instance for Test Class and
-        * after instantiation @BeforeAll executes.
-        */
+         *only one instance will be created for test methods of class
+         * for that Junit allows us to remove static from @BeforeAll and @AfterAll methods
+         * because there will be only single instance for Test Class and
+         * after instantiation @BeforeAll executes.
+         */
 class AdditionTest {
     /*
      *
@@ -54,6 +54,7 @@ class AdditionTest {
     }
 
     @Test
+    @DisplayName("add 2 number Test")
     void add() {
         int actual = mathTest.add(33, 44);
         int expected = 77;
@@ -61,6 +62,7 @@ class AdditionTest {
     }
 
     @Test
+    @Disabled               // @Disable Skips the Test case
     void computeCircleArea() {
         double actual = Math.PI * 10 * 10;
         double expected = mathTest.computeCircleArea(10);
