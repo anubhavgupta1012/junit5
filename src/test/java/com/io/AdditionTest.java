@@ -51,16 +51,23 @@ class AdditionTest {
 
     @Nested
     class addTest {// Nested class Test are just for grouping same kind of tests together
+
         @Test
         @DisplayName("addition of + numbers")
         void addPositive() {
-            assertEquals(77, mathTest.add(33, 44), "addition is a+b");
+            assertEquals(77, mathTest.add(33, 44), () -> "addition is a+b");
+            /*
+             *message "addition is a+b" is shown when this assertEquals() fails but we are passing  it irrespective
+             * of fail or pass , if this String generation is high cost task then we wanted is to generte this String
+             * only when the test fails so instead of passing directly we use lambda like
+             * ()-> "addition is a+b"
+             */
         }
 
         @Test
         @DisplayName("addition of - numbers")
         void addNegative() {
-            assertEquals(77, mathTest.add(-23, 100), "addition is -a+b");
+            assertEquals(77, mathTest.add(-23, 100), () -> "addition is -a+b");
         }
     }
 
