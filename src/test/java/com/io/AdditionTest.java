@@ -1,16 +1,24 @@
 package com.io;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class AdditionTest {
+    /*
+     *
+     * There can be any number of @BeforeEach,@AfterEach, @BeforeAll, @AfterAll annotated methods.And they are going to run
+     * randomly on their own.
+     */
     MathTest mathTest;
 
     public AdditionTest() {
         System.out.println("Test Class Instance created");
+    }
+
+    @BeforeAll
+    public static void beforeAll() {
+        System.out.println("Before All created Here");
     }
 
     @BeforeEach
@@ -18,10 +26,24 @@ class AdditionTest {
         mathTest = new MathTest();
         System.out.println("Before Each Test Execution");
     }
+
+    @BeforeEach
+    public void beforeEach2() {
+        mathTest = new MathTest();
+        System.out.println("Before Each2 Test Execution");
+    }
+
     @AfterEach
     public void afterEach() {
-        System.out.println("After Each Test Execution");
+        /* Runtime.getRuntime().gc();*/
+        System.gc();
+        System.out.println("Garbage Collection After Each Test Execution");
     }
+    @AfterAll
+    public static void afterAll() {
+        System.out.println("After All Executed");
+    }
+
     @Test
     void add() {
         int actual = mathTest.add(33, 44);
