@@ -71,9 +71,14 @@ class AdditionTest {
         }
     }
 
-    @Test
+    @RepeatedTest(3)
     @EnabledForJreRange(min = JRE.JAVA_8, max = JRE.JAVA_11)
-    void computeCircleArea() {
+    void computeCircleArea(RepetitionInfo info) {
+        /*
+        * this is basically about when we want to repeat the test and on each repeat we need to do
+        * diiferent thing according to RepetitionInfo
+        */
+        System.out.println(info.getCurrentRepetition() + " time test");
         boolean isDbConnected = true;
         assumeTrue(isDbConnected);
         double actual = Math.PI * 10 * 10;
