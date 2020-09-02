@@ -76,7 +76,8 @@ class AdditionTest {
     void computeCircleArea(RepetitionInfo info) {
         /*
         * this is basically about when we want to repeat the test and on each repeat we need to do
-        * diiferent thing according to RepetitionInfo
+        * diiferent thing according to RepetitionInfo.
+        * This is also an example of dependency injection.
         */
         System.out.println(info.getCurrentRepetition() + " time test");
         boolean isDbConnected = true;
