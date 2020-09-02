@@ -14,6 +14,8 @@ class AdditionTest {
      * randomly on their own.
      */
     MathTest mathTest;
+    TestInfo info;      // TestInfo is about getting the info about Test class and  Methods.
+    TestReporter reporter;  //TestReporter is about reporting the logging the Test reports.
 
     public AdditionTest() {
         //For Each Test Method a new Instance of AdditionTest is created every time for Every method
@@ -26,7 +28,9 @@ class AdditionTest {
     }
 
     @BeforeEach
-    public void beforeEach() {
+    public void beforeEach(TestInfo info, TestReporter reporter) {
+        this.info = info;
+        this.reporter = reporter;
         mathTest = new MathTest();
         System.out.println("Before Each Test Execution");
     }
@@ -56,6 +60,7 @@ class AdditionTest {
         @DisplayName("addition of + numbers")
         void addPositive() {
             assertEquals(77, mathTest.add(33, 44), () -> "addition is a+b");
+            reporter.publishEntry("Running the class "+info.getTestClass()+" and method "+info.getTestMethod());
             /*
              *message "addition is a+b" is shown when this assertEquals() fails but we are passing  it irrespective
              * of fail or pass , if this String generation is high cost task then we wanted is to generte this String
@@ -75,10 +80,10 @@ class AdditionTest {
     @EnabledForJreRange(min = JRE.JAVA_8, max = JRE.JAVA_11)
     void computeCircleArea(RepetitionInfo info) {
         /*
-        * this is basically about when we want to repeat the test and on each repeat we need to do
-        * diiferent thing according to RepetitionInfo.
-        * This is also an example of dependency injection.
-        */
+         * this is basically about when we want to repeat the test and on each repeat we need to do
+         * diiferent thing according to RepetitionInfo.
+         * This is also an example of dependency injection.
+         */
         System.out.println(info.getCurrentRepetition() + " time test");
         boolean isDbConnected = true;
         assumeTrue(isDbConnected);
